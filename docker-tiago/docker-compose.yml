@@ -1,26 +1,53 @@
-version: '3'
+version: '3.9'
 
 services:
-    ros-tiago-base:
+    base-os-tiago:
         build:
             context: .
-        image: ros-tiago-base
-        user: admin:1000
-        deploy:
-            resources:
-                reservations:
-                    devices:
-                        - capabilities:
-                            - gpu
-        stdin_open: true
-        tty: true
-        privileged: true
-        network_mode: "host"
-        volumes:
-            - \\wsl.localhost\Ubuntu-20.04\mnt\wslg:/tmp
-        environment:
-            - DISPLAY=:0
-            - NVIDIA_VISIBLE_DEVICES=all
-            - NVIDIA_DRIVER_CAPABILITIES=all
-        entrypoint: /usr/local/bin/scripts/workspace-entrypoint.sh
-        command: tail -f /dev/null # bash -c "top"
+            dockerfile: Dockerfile.x86_64
+        image: base-os-tiago
+    
+    base-os-tiago.humble:
+        depends_on:
+            - base-os-tiago
+        build:
+            context: .
+            dockerfile: Dockerfile.humble
+            args:
+                - BASE_IMAGE=base-os-tiago
+        image: base-os-tiago.humble
+
+    
+    base-os-tiago.humble.dep:
+        depends_on:
+            - base-os-tiago.humble
+        build:
+            context: .
+            dockerfile: Dockerfile.dep
+            args:
+                - BASE_IMAGE=base-os-tiago.humble
+        image: base-os-tiago.humble.dep
+    
+    # ros-tiago-base:
+    #     build:
+    #         context: .
+    #     image: ros-tiago-base
+    #     user: admin:1000
+    #     deploy:
+    #         resources:
+    #             reservations:
+    #                 devices:
+    #                     - capabilities:
+    #                         - gpu
+    #     stdin_open: true
+    #     tty: true
+    #     privileged: true
+    #     network_mode: "host"
+    #     volumes:
+    #         - \\wsl.localhost\Ubuntu-20.04\mnt\wslg:/tmp
+    #     environment:
+    #         - DISPLAY=:0
+    #         - NVIDIA_VISIBLE_DEVICES=all
+    #         - NVIDIA_DRIVER_CAPABILITIES=all
+    #     entrypoint: /usr/local/bin/scripts/workspace-entrypoint.sh
+    #     command: tail -f /dev/null # bash -c "top"
