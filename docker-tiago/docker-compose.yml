@@ -1,32 +1,31 @@
 version: '3.9'
 
 services:
-    base-os-tiago:
+    base-os:
         build:
             context: .
             dockerfile: Dockerfile.x86_64
-        image: base-os-tiago
+        image: base-os
     
-    base-os-tiago.humble:
+    base-os.humble:
         depends_on:
-            - base-os-tiago
+            - base-os
         build:
             context: .
             dockerfile: Dockerfile.humble
             args:
-                - BASE_IMAGE=base-os-tiago
-        image: base-os-tiago.humble
+                - BASE_IMAGE=base-os
+        image: base-os.humble
 
-    
-    base-os-tiago.humble.dep:
-        depends_on:
-            - base-os-tiago.humble
-        build:
-            context: .
-            dockerfile: Dockerfile.dep
-            args:
-                - BASE_IMAGE=base-os-tiago.humble
-        image: base-os-tiago.humble.dep
+    # base-os.humble.dep:
+    #     depends_on:
+    #         - base-os.humble
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile.dep
+    #         args:
+    #             - BASE_IMAGE=base-os.humble
+    #     image: base-os.humble.dep
     
     # ros-tiago-base:
     #     build:

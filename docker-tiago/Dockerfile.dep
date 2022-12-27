@@ -34,7 +34,7 @@ RUN apt-get update && apt install -y \
 && rm -rf /var/lib/apt/lists/* \
 && apt-get clean
 
-RUN apt-get update && \
-        python3 -m pip install python-snap7 \
-&& rm -rf /var/lib/apt/lists/* \
-&& apt-get clean
+# RUN apt-get update && \
+#         python3 -m pip install python-snap7 \
+# && rm -rf /var/lib/apt/lists/* \
+# && apt-get clean
