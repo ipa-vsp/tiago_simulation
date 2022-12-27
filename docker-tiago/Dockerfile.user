@@ -43,6 +43,7 @@ RUN echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
 RUN mkdir -p /usr/local/bin/scripts
 COPY *entrypoint.sh /usr/local/bin/scripts/
 RUN  chmod +x /usr/local/bin/scripts/*.sh
+RUN sed -i -e 's/\r$//' /usr/local/bin/scripts/*.sh
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}

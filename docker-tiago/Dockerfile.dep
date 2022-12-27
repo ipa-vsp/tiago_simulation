@@ -38,3 +38,10 @@ RUN apt-get update && apt install -y \
 #         python3 -m pip install python-snap7 \
 # && rm -rf /var/lib/apt/lists/* \
 # && apt-get clean
+
+# RUN mkdir -p /home/${USERNAME}/colcon_ws/src
+# COPY tiago.repos /home/${USERNAME}/colcon_ws
+# RUN apt-get update && \
+#     cd /home/${USERNAME}/colcon_ws && \
+#     vcs import --input tiago.repos src \
+#     && rm -rf /var/lib/apt/lists/*
