@@ -18,6 +18,10 @@ RUN apt-get update && \
     rosinstall src /opt/ros/melodic tiago.rosinstall \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    ros-melodic-rviz \
+    ros-melodic-joint-state-publisher-gui \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy scripts
 RUN mkdir -p /usr/local/bin/scripts

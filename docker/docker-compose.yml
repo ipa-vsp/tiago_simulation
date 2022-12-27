@@ -18,7 +18,7 @@ services:
         volumes:
             - \\wsl.localhost\Ubuntu-20.04\mnt\wslg:/tmp
         environment:
-            - DISPLAY=$DISPLAY
+            - DISPLAY=:0
             - NVIDIA_VISIBLE_DEVICES=all
             - NVIDIA_DRIVER_CAPABILITIES=all
         # entrypoint: /usr/local/bin/scripts/workspace-entrypoint.sh
